@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2d6gxncufhkd"]
+
+[ext_resource type="Texture2D" uid="uid://chr1gcpad50ts" path="res://Assets/sea_background/PNG/sea_background.png" id="1_ec6nv"]
+[ext_resource type="Texture2D" uid="uid://b2poocsf4g4jt" path="res://Assets/sea_background/PNG/farground.png" id="2_dj2h4"]
+[ext_resource type="Texture2D" uid="uid://b4de76lwtpnrs" path="res://Assets/sea_background/PNG/mid_background.png" id="3_c4qqi"]
+[ext_resource type="Texture2D" uid="uid://10ndei5i1xh1" path="res://Assets/sea_background/PNG/foreground.png" id="4_qn5uw"]
+
+[node name="Parallax" type="Node2D"]
+position = Vector2(480, 320)
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.1, 0.1)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D"]
+texture = ExtResource("1_ec6nv")
+
+[node name="Parallax2D2" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D2"]
+texture = ExtResource("2_dj2h4")
+
+[node name="Parallax2D3" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D3"]
+texture = ExtResource("3_c4qqi")
+
+[node name="Parallax2D4" type="Parallax2D" parent="."]
+repeat_size = Vector2(1920, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="Parallax2D4"]
+position = Vector2(0, 2.5)
+scale = Vector2(1, 1.05517)
+texture = ExtResource("4_qn5uw")

@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://bk0i8o77tlnhy"]
+
+[ext_resource type="Script" path="res://Scenes/tortuga.gd" id="1_4m0h4"]
+[ext_resource type="Texture2D" uid="uid://6rd310rje1pi" path="res://Assets/turtle.PNG" id="1_xvqyg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0n74o"]
+atlas = ExtResource("1_xvqyg")
+region = Rect2(0, 0, 286, 239)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_feks2"]
+atlas = ExtResource("1_xvqyg")
+region = Rect2(286, 0, 286, 239)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_spbso"]
+atlas = ExtResource("1_xvqyg")
+region = Rect2(572, 0, 286, 239)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v3qhn"]
+atlas = ExtResource("1_xvqyg")
+region = Rect2(858, 0, 286, 239)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gcgp"]
+atlas = ExtResource("1_xvqyg")
+region = Rect2(1144, 0, 286, 239)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1pnq"]
+atlas = ExtResource("1_xvqyg")
+region = Rect2(1430, 0, 286, 239)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lqegb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0n74o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_feks2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_spbso")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v3qhn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4gcgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1pnq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_4m0h4")
+
+[node name="tuga" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tuga"]
+polygon = PackedVector2Array(-52, 57, 0, 42, 79, 79, 44, 31, 77, 9, 115, -45, 91, -54, 80, -90, 45, -91, 46, -108, 20, -90, -26, -79, -60, -54, -66, -80, -90, -17, -138, 28, -101, 62)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="tuga"]
+position = Vector2(2, -2)
+sprite_frames = SubResource("SpriteFrames_lqegb")
+animation = &"idle"
+frame_progress = 0.152031

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://4i2ihgn7kfe8"]
+
+[ext_resource type="Texture2D" uid="uid://dn4ony5mmaw2r" path="res://Assets/Tortugita2.png" id="1_j53h6"]
+[ext_resource type="Script" path="res://Scenes/escuero.gd" id="1_ni3a8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ikv6i"]
+radius = 65.0692
+
+[node name="Escuero" type="Node2D" groups=["camara"]]
+script = ExtResource("1_ni3a8")
+
+[node name="Area2D" type="Area2D" parent="." groups=["escueros"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_j53h6")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(-1, 11)
+shape = SubResource("CircleShape2D_ikv6i")

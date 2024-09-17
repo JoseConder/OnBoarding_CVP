@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://yt7q3qbyarpf"]
+
+[ext_resource type="PackedScene" uid="uid://d2d6gxncufhkd" path="res://Scenes/bg.tscn" id="1_l6wp0"]
+[ext_resource type="Script" path="res://Scenes/main.gd" id="1_y01b7"]
+[ext_resource type="PackedScene" uid="uid://4yjr5opky08" path="res://Scenes/straw.tscn" id="4_ytvli"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_y01b7")
+
+[node name="BG" parent="." instance=ExtResource("1_l6wp0")]
+
+[node name="straw" parent="." instance=ExtResource("4_ytvli")]
+position = Vector2(-462, 336)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Camera2D" type="Camera2D" parent="Node2D" groups=["camara"]]
+unique_name_in_owner = true
+position = Vector2(480, 320)
+zoom = Vector2(0.595, 0.595)

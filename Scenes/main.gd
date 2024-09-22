@@ -4,9 +4,14 @@ var TurtleScene = preload("res://Scenes/escuero.tscn")
 var turtle_size = 100 
 var screen_size = get_viewport_rect().size
 var timer: Timer
+var health_timer: Timer
 @export var score = 0
+@export var health = 3
+@export var max_health = 10
 
 func _ready() -> void:
+	get_tree().paused = false
+	$pause_layer/pause_menu.hide()
 	$straw.position.x = 0
 	$straw.position.y = 320
 	%Camera2D.position.x = 0 + (960/2)
@@ -18,6 +23,13 @@ func _ready() -> void:
 	timer.autostart = true
 	timer.connect("timeout", Callable(self, "_on_timer_timeout"))
 	add_child(timer)
+	
+	health_timer = Timer.new()
+	health_timer.wait_time = 30
+	health_timer.one_shot = false
+	health_timer.autostart = true
+	health_timer.connect("timeout", Callable(self, "_on_health_timer_timeout"))
+	add_child(health_timer)
 
 
 func _process(delta: float) -> void:
@@ -28,7 +40,14 @@ func _process(delta: float) -> void:
 	%Camera2D.position.x += 150 * delta
 	if score < 0:
 		score = 0 
-	print(score)
+	if health <= 0:
+		get_tree().change_scene_to_file("res://Scenes/gameover.tscn")
+		
+	if Input.is_action_just_pressed("pausa") and !get_tree().paused:
+		$pause_layer/pause_menu.pause()
+		$pause_layer/pause_menu.show()
+	elif Input.is_action_just_pressed("pausa") and get_tree().paused:
+		$pause_layer/pause_menu.resume()
 
 func spawn_turtles(amount: int) -> void:
 	var positions = [] # Lista para almacenar las posiciones usadas
@@ -40,7 +59,7 @@ func spawn_turtles(amount: int) -> void:
 		var attempts = 0 # Contador de intentos para evitar ciclos infinitos
 
 		while not valid_position and attempts < 100: # Limitar a 100 intentos para evitar crasheos
-			spawn_y = randf_range(-400, 400)
+			spawn_y = randf_range(-200, 800)
 			
 			valid_position = true
 			for position in positions:
@@ -61,11 +80,17 @@ func spawn_turtles(amount: int) -> void:
 			print("No se pudo encontrar una posición válida para la tortuga ", i)
 
 func _on_enemy_out_of_screen() -> void:
-	print("Tortuga extra")
 	spawn_turtles(1)
 	
 func _on_timer_timeout() -> void:
 	spawn_turtles(1)
 	score += 5
+	if score > SaveLoad.highest_record:
+		SaveLoad.highest_record = score
+		SaveLoad.save_score()
 	
+func _on_health_timer_timeout() -> void:
+	print("aumento de vida")
+	if health < max_health:
+		health += 1
 	

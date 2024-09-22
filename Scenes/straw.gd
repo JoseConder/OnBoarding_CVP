@@ -21,9 +21,3 @@ func handle_input() -> void:
 	if movement_velocity.length() > 0:
 		velocity = movement_velocity.normalized() * speed
 	move_and_slide()
-
-
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	print("Choque")
-	var main = get_tree().root.get_node("Main")
-	main.score -= 5

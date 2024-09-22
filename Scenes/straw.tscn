@@ -6,20 +6,18 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n5182"]
 size = Vector2(70, 20)
 
-[node name="Straw" type="CharacterBody2D"]
+[node name="Straw" type="CharacterBody2D" groups=["Player"]]
+collision_mask = 6
+motion_mode = 1
 script = ExtResource("1_hogeh")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(18, 19.5)
-rotation = 4.66701
-scale = Vector2(2.125, 2.21875)
-texture = ExtResource("1_mamt1")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" groups=["straws"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["straws"]]
 position = Vector2(25, 28)
 shape = SubResource("RectangleShape2D_n5182")
 
-[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+texture_filter = 1
+position = Vector2(-7, -8.5)
+rotation = -1.61618
+scale = Vector2(2.125, 2.21875)
+texture = ExtResource("1_mamt1")

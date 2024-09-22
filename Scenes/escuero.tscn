@@ -6,16 +6,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ikv6i"]
 radius = 65.0692
 
-[node name="Escuero" type="Node2D" groups=["camara"]]
+[node name="Escuero" type="Area2D" groups=["camara", "escueros"]]
 script = ExtResource("1_ni3a8")
 
-[node name="Area2D" type="Area2D" parent="." groups=["escueros"]]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["escueros"]]
+position = Vector2(-1, 11)
+shape = SubResource("CircleShape2D_ikv6i")
 
-[node name="Sprite2D" type="Sprite2D" parent="Area2D"]
+[node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("1_j53h6")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1, 11)
-shape = SubResource("CircleShape2D_ikv6i")
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

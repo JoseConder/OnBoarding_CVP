@@ -1,16 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://c8xt3607atxos"]
+[gd_scene load_steps=7 format=3 uid="uid://c8xt3607atxos"]
 
+[ext_resource type="Script" path="res://Scenes/menu.gd" id="1_qdmrv"]
 [ext_resource type="Texture2D" uid="uid://dn4ony5mmaw2r" path="res://Assets/Tortugita2.png" id="1_sikrx"]
 [ext_resource type="Texture2D" uid="uid://b0oj7npa4k5hg" path="res://Assets/kenney_ui-pack/Vector/Extra/button_rectangle_depth_line.svg" id="2_ejbdp"]
-[ext_resource type="Texture2D" uid="uid://dnruvs876i1dw" path="res://Assets/kenney_ui-pack/Vector/Extra/button_rectangle_line.svg" id="3_87cms"]
+[ext_resource type="Texture2D" uid="uid://chr1gcpad50ts" path="res://Assets/sea_background/PNG/sea_background.png" id="3_mgcjw"]
+[ext_resource type="FontFile" uid="uid://dmufjtdy3tnlf" path="res://Assets/kenney_ui-pack/Font/Kenney Future.ttf" id="4_8c58p"]
+[ext_resource type="AudioStream" uid="uid://1416pel7u412" path="res://Assets/kevin-macleod-airport-lounge.mp3" id="6_wbbef"]
 
 [node name="Main Menu" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_qdmrv")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -26,33 +31,93 @@ layout_mode = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Logo" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+[node name="logo" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 texture = ExtResource("1_sikrx")
+
+[node name="creditos" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Hecho
+Por
+Jose
+Conde"
+horizontal_alignment = 1
 
 [node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Jugar" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="play" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("2_ejbdp")
 
-[node name="Opciones" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="play_button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/play"]
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 190.0
+offset_bottom = 57.0
+text = "Jugar"
+
+[node name="Scores" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("2_ejbdp")
 
-[node name="Salir" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
+[node name="scores_button" type="MenuButton" parent="MarginContainer/HBoxContainer/VBoxContainer2/Scores"]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 57.0
+text = "Scores"
+flat = false
+item_count = 1
+popup/item_0/text = "hola"
+
+[node name="close" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
 layout_mode = 2
 texture = ExtResource("2_ejbdp")
 
-[node name="Version" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-texture = ExtResource("3_87cms")
+[node name="close_button" type="Button" parent="MarginContainer/HBoxContainer/VBoxContainer2/close"]
+layout_mode = 0
+offset_right = 188.0
+offset_bottom = 56.0
+text = "Close"
 
-[node name="CenterContainer" type="CenterContainer" parent="MarginContainer"]
+[node name="VBoxContainer3" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_direction = 3
 layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
 
-[node name="Sprites" type="TextureRect" parent="MarginContainer/CenterContainer"]
+[node name="Title" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer3"]
 layout_mode = 2
-texture = ExtResource("1_sikrx")
+theme_override_fonts/font = ExtResource("4_8c58p")
+theme_override_font_sizes/font_size = 46
+text = "Turtle evader 2.0"
+horizontal_alignment = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="MarginContainer/HBoxContainer"]
+show_behind_parent = true
+position = Vector2(480, 320)
+scale = Vector2(0.498958, 0.589815)
+texture = ExtResource("3_mgcjw")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_left = 720.0
+offset_top = 573.0
+offset_right = 1185.0
+offset_bottom = 674.0
+theme_override_font_sizes/font_size = 8
+text = "Airport Lounge by Kevin MacLeod | http://incompetech.com
+Music promoted by https://www.free-stock-music.com
+Creative Commons / Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_wbbef")
+autoplay = true
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/play/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="about_to_popup" from="MarginContainer/HBoxContainer/VBoxContainer2/Scores/scores_button" to="." method="_on_scores_button_about_to_popup"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/Scores/scores_button" to="." method="_on_scores_button_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer2/close/close_button" to="." method="_on_close_button_pressed"]

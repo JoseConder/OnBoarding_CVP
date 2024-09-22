@@ -1,8 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://yt7q3qbyarpf"]
+[gd_scene load_steps=11 format=3 uid="uid://yt7q3qbyarpf"]
 
 [ext_resource type="PackedScene" uid="uid://d2d6gxncufhkd" path="res://Scenes/bg.tscn" id="1_l6wp0"]
 [ext_resource type="Script" path="res://Scenes/main.gd" id="1_y01b7"]
+[ext_resource type="Script" path="res://Scenes/gui.gd" id="4_10jyy"]
 [ext_resource type="PackedScene" uid="uid://4yjr5opky08" path="res://Scenes/straw.tscn" id="4_ytvli"]
+[ext_resource type="AudioStream" uid="uid://ddhc5d2e5su36" path="res://Assets/underwater-river.wav" id="5_c5v8o"]
+[ext_resource type="PackedScene" uid="uid://cfmi0uv83hv4m" path="res://Scenes/pause_menu.tscn" id="6_dgpye"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0mdlb"]
+size = Vector2(1847, 92)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3y6xc"]
+size = Vector2(1847, 96)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejjkh"]
+size = Vector2(124, 1270)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mjf5o"]
+size = Vector2(101, 1270)
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_y01b7")
@@ -18,3 +33,101 @@ position = Vector2(-462, 336)
 unique_name_in_owner = true
 position = Vector2(480, 320)
 zoom = Vector2(0.595, 0.595)
+
+[node name="BordeSup" type="StaticBody2D" parent="Node2D/Camera2D"]
+position = Vector2(-480, -320)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Camera2D/BordeSup"]
+position = Vector2(468.5, -259)
+shape = SubResource("RectangleShape2D_0mdlb")
+
+[node name="BordeInf" type="StaticBody2D" parent="Node2D/Camera2D"]
+position = Vector2(-480, -320)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Camera2D/BordeInf"]
+position = Vector2(468.5, 911)
+shape = SubResource("RectangleShape2D_3y6xc")
+
+[node name="BordeIzq" type="StaticBody2D" parent="Node2D/Camera2D"]
+position = Vector2(-480, -320)
+collision_layer = 2
+
+[node name="izq" type="CollisionShape2D" parent="Node2D/Camera2D/BordeIzq"]
+position = Vector2(-391, 318)
+shape = SubResource("RectangleShape2D_ejjkh")
+
+[node name="BordeDer" type="StaticBody2D" parent="Node2D/Camera2D"]
+position = Vector2(-480, -320)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Camera2D/BordeDer"]
+position = Vector2(1339, 321)
+shape = SubResource("RectangleShape2D_mjf5o")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Node2D/Camera2D"]
+position = Vector2(-480, -320)
+stream = ExtResource("5_c5v8o")
+volume_db = -21.79
+autoplay = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_10jyy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/GUI"]
+layout_direction = 1
+layout_mode = 0
+offset_right = 940.0
+offset_bottom = 50.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/GUI/HBoxContainer"]
+layout_direction = 2
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Score" type="Label" parent="UI/GUI/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/GUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Highscore" type="Label" parent="UI/GUI/HBoxContainer/VBoxContainer2"]
+layout_direction = 3
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="UI/GUI/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="health" type="Label" parent="UI/GUI/HBoxContainer/VBoxContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="pause_layer" type="CanvasLayer" parent="."]
+
+[node name="pause_menu" parent="pause_layer" instance=ExtResource("6_dgpye")]
+offset_left = -110.5
+offset_top = -54.5
+offset_right = -110.5
+offset_bottom = -54.5

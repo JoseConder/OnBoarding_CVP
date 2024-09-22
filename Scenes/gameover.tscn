@@ -1,0 +1,80 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvnva78r45okv"]
+
+[ext_resource type="Script" path="res://Scenes/gameover.gd" id="1_aig85"]
+[ext_resource type="Texture2D" uid="uid://chr1gcpad50ts" path="res://Assets/sea_background/PNG/sea_background.png" id="2_uaq4d"]
+[ext_resource type="FontFile" uid="uid://mv6wpxhhvjyo" path="res://Assets/kenney_ui-pack/Font/Kenney Future Narrow.ttf" id="3_n581r"]
+[ext_resource type="AudioStream" uid="uid://u4x0w6dl3u0v" path="res://Assets/roa-music-underwater.mp3" id="4_ni7yc"]
+
+[node name="gameover" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_aig85")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(482.5, 319.5)
+scale = Vector2(0.499479, 0.591667)
+texture = ExtResource("2_uaq4d")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+offset_left = 20.0
+offset_top = 275.0
+offset_right = 940.0
+offset_bottom = 364.0
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("3_n581r")
+theme_override_font_sizes/font_size = 37
+text = "GAME OVER!!!
+Suficientes tortugas han sufrido..."
+horizontal_alignment = 1
+
+[node name="Exit" type="Button" parent="."]
+layout_mode = 2
+offset_left = 400.0
+offset_top = 452.0
+offset_right = 552.0
+offset_bottom = 483.0
+size_flags_vertical = 8
+text = "Salir..."
+
+[node name="Retry" type="Button" parent="."]
+layout_mode = 2
+offset_left = 400.0
+offset_top = 413.0
+offset_right = 552.0
+offset_bottom = 444.0
+size_flags_vertical = 4
+text = "Volver a intentarlo"
+
+[node name="royalty" type="Label" parent="."]
+layout_mode = 0
+offset_left = 761.0
+offset_top = 610.0
+offset_right = 959.0
+offset_bottom = 640.0
+theme_override_font_sizes/font_size = 7
+text = "Underwater River by | e s c p | https://www.escp.space
+https://escp-music.bandcamp.com"
+
+[node name="royalty2" type="Label" parent="."]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 580.0
+offset_right = 236.0
+offset_bottom = 633.0
+theme_override_font_sizes/font_size = 7
+text = "Underwater by Roa Music | https://soundcloud.com/roa_music1031
+Music promoted by https://www.free-stock-music.com
+Creative Commons / Attribution 3.0 Unported License (CC BY 3.0)
+https://creativecommons.org/licenses/by/3.0/deed.en_US"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ni7yc")
+autoplay = true
+
+[connection signal="pressed" from="Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Retry" to="." method="_on_retry_pressed"]
